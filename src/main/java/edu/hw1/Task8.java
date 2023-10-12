@@ -1,7 +1,5 @@
 package edu.hw1;
 
-import java.io.Console;
-
 public final class Task8 {
 
 

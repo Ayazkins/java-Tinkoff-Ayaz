@@ -6,6 +6,7 @@ public final class Task1 {
 
     private static final int SECONDS_IN_MINUTES = 60;
 
+    @SuppressWarnings("ReturnCount")
     public static int minutesToSeconds(String time) {
         if (time == null) {
             return -1;
@@ -22,9 +23,12 @@ public final class Task1 {
         } catch (NumberFormatException exception) {
             return -1;
         }
+        int answer;
         if (seconds >= SECONDS_IN_MINUTES || seconds < 0 || minutes < 0) {
-            return -1;
+            answer = -1;
+        } else {
+            answer = minutes * SECONDS_IN_MINUTES + seconds;
         }
-        return minutes * SECONDS_IN_MINUTES + seconds;
+        return answer;
     }
 }

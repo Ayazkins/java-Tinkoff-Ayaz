@@ -1,6 +1,7 @@
 package edu.hw1;
 
 import edu.project1.Game;
+import edu.project1.WordDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +14,9 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        var game = new Game();
+        var dict = new WordDictionary();
+        dict.AddWord("coffee");
+        var game = new Game(dict);
         game.Launch();
 //        // Press Alt+Enter with your caret at the highlighted text to see how
 //        // IntelliJ IDEA suggests fixing it.

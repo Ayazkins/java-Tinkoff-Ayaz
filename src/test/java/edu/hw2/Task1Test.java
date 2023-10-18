@@ -31,12 +31,9 @@ public class Task1Test {
     @DisplayName("Exponent test")
     void ExponentTest() {
         var two = new Task1.Expr.Constant(2);
-        var eight = new Task1.Expr.Constant(8);
-        var exp = new Task1.Expr.Exponent(eight, two);
-        assertThat(exp.evaluate()).isEqualTo(3);
-        var negTwo = new Task1.Expr.Negate(two);
-        var badExp = new Task1.Expr.Exponent(eight, negTwo);
-        assertThrows(ArithmeticException.class, badExp::evaluate);
+        var two_ = new Task1.Expr.Constant(2);
+        var exp = new Task1.Expr.Exponent(two_, two);
+        assertThat(exp.evaluate()).isEqualTo(4);
     }
 
     @Test

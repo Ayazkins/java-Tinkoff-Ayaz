@@ -1,6 +1,5 @@
 package edu.hw1;
 
-import edu.hw2.Task1;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static edu.hw2.Task4.callingInfo;

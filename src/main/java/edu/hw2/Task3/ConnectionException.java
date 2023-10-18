@@ -10,6 +10,6 @@ public class ConnectionException extends RuntimeException {
     }
 
     ConnectionException() {
-        super();
+
     }
 }

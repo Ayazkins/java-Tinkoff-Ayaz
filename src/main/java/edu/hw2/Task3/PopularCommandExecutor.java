@@ -1,7 +1,5 @@
 package edu.hw2.Task3;
 
-import edu.hw2.Task3.Connection;
-import edu.hw2.Task3.ConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +27,7 @@ public final class PopularCommandExecutor {
                 connection.execute(command);
                 LOGGER.info("Command was executed");
                 return;
-            } catch (ConnectionException a) {
+            } catch (ConnectionException ex) {
                 LOGGER.info("failed");
             }
             connection.close();

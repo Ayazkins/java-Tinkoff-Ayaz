@@ -1,8 +1,13 @@
 package edu.hw2;
 
-public class Task4 {
+public final class Task4 {
+
+    private Task4() {
+
+    }
 
     private static final int NUMBER_IN_STACK = 2;
+
     public static CallingInfo callingInfo() {
         StackTraceElement[] stktrace
             = Thread.currentThread().getStackTrace();

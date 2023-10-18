@@ -1,9 +1,5 @@
 package edu.project1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import java.util.Arrays;
-
 public class Word {
 
     private final String word;
@@ -11,7 +7,7 @@ public class Word {
     private String curWord;
 
     public Word(WordDictionary wordDictionary) {
-        word = wordDictionary.Generate();
+        word = wordDictionary.generate();
         StringBuilder sb = new StringBuilder();
         while (sb.length() < word.length()) {
             sb.append("*");
@@ -19,7 +15,7 @@ public class Word {
         curWord = sb.toString();
     }
 
-    public boolean TryChar(char newChar) {
+    public boolean tryChar(char newChar) {
         int index = word.indexOf(newChar);
         if (index == -1) {
             return false;
@@ -33,15 +29,15 @@ public class Word {
         return true;
     }
 
-    public String GetCurWord() {
+    public String getCurWord() {
         return curWord;
     }
 
-    public boolean IsWordFull() {
+    public boolean isWordFull() {
         return word.equals(curWord);
     }
 
-    public int Length() {
+    public int length() {
         return word.length();
     }
 }

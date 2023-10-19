@@ -5,10 +5,16 @@ public class Task1 {
     public sealed interface Expr {
         double evaluate();
 
+        String toString();
+
         record Constant(double value) implements Expr {
             @Override
             public double evaluate() {
                 return value;
+            }
+
+            public String toString() {
+                return "value = " + evaluate();
             }
         }
 
@@ -21,6 +27,10 @@ public class Task1 {
             @Override
             public double evaluate() {
                 return -value.evaluate();
+            }
+
+            public String toString() {
+                return "value = " + evaluate();
             }
         }
 
@@ -42,6 +52,10 @@ public class Task1 {
             public double evaluate() {
                 return Math.pow(value.evaluate(), value2.evaluate());
             }
+
+            public String toString() {
+                return  "value = " + value.evaluate() + '^' + value2.evaluate() + " = " + evaluate();
+            }
         }
 
         record Addition(Expr value, Expr value2) implements Expr {
@@ -62,6 +76,10 @@ public class Task1 {
             public double evaluate() {
                 return value.evaluate() + value2.evaluate();
             }
+
+            public String toString() {
+                return  "value = " + value.evaluate() + '+' + value2.evaluate() + " = " + evaluate();
+            }
         }
 
         record Multiplication(Expr value, Expr value2) implements Expr {
@@ -81,6 +99,10 @@ public class Task1 {
             @Override
             public double evaluate() {
                 return value.evaluate() * value2.evaluate();
+            }
+
+            public String toString() {
+                return  "value = " + value.evaluate() + '*' + value2.evaluate() + " = " + evaluate();
             }
         }
     }

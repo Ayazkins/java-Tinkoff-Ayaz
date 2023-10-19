@@ -23,4 +23,8 @@ public class Rectangle {
     public int area() {
         return height * width;
     }
+
+    public String toString() {
+        return "height = " + height + " width " + width;
+    }
 }

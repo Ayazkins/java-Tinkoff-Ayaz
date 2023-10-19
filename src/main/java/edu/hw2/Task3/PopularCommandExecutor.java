@@ -22,15 +22,12 @@ public final class PopularCommandExecutor {
         int numberTry = 0;
         while (numberTry < maxAttempts) {
             numberTry += 1;
-            Connection connection = manager.getConnection();
-            try {
+            try (Connection connection = manager.getConnection()){
                 connection.execute(command);
-                LOGGER.info("Command was executed");
                 return;
             } catch (ConnectionException ex) {
                 LOGGER.info("failed");
             }
-            connection.close();
         }
         throw new ConnectionException("Failed");
     }

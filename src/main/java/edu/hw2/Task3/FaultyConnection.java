@@ -6,8 +6,10 @@ import org.apache.logging.log4j.Logger;
 public class FaultyConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
 
+    private final static double CHANCE_OF_FAULTY = 1;
+
     public void execute(String command) {
-        if ((Math.random() * 2) > 1) {
+        if (Random.GetRandom() > CHANCE_OF_FAULTY) {
             LOGGER.info("Success");
         } else {
             throw new ConnectionException();

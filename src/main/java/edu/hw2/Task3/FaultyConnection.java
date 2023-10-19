@@ -9,7 +9,7 @@ public class FaultyConnection implements Connection {
     private final static double CHANCE_OF_FAULTY = 1;
 
     public void execute(String command) {
-        if (Random.GetRandom() > CHANCE_OF_FAULTY) {
+        if (Random.getRandom() > CHANCE_OF_FAULTY) {
             LOGGER.info("Success");
         } else {
             throw new ConnectionException();

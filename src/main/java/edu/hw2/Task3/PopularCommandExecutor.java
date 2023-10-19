@@ -22,7 +22,7 @@ public final class PopularCommandExecutor {
         int numberTry = 0;
         while (numberTry < maxAttempts) {
             numberTry += 1;
-            try (Connection connection = manager.getConnection()){
+            try (Connection connection = manager.getConnection()) {
                 connection.execute(command);
                 return;
             } catch (ConnectionException ex) {

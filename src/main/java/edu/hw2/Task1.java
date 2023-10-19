@@ -2,6 +2,10 @@ package edu.hw2;
 
 public class Task1 {
 
+    private final static String OUTPUT_HELPER = "value = ";
+
+    private final static String EQUAL = " = ";
+
     public sealed interface Expr {
         double evaluate();
 
@@ -14,7 +18,7 @@ public class Task1 {
             }
 
             public String toString() {
-                return "value = " + evaluate();
+                return OUTPUT_HELPER + evaluate();
             }
         }
 
@@ -30,7 +34,7 @@ public class Task1 {
             }
 
             public String toString() {
-                return "value = " + evaluate();
+                return OUTPUT_HELPER + evaluate();
             }
         }
 
@@ -54,7 +58,7 @@ public class Task1 {
             }
 
             public String toString() {
-                return  "value = " + value.evaluate() + '^' + value2.evaluate() + " = " + evaluate();
+                return OUTPUT_HELPER + value.evaluate() + '^' + value2.evaluate() + EQUAL + evaluate();
             }
         }
 
@@ -78,7 +82,7 @@ public class Task1 {
             }
 
             public String toString() {
-                return  "value = " + value.evaluate() + '+' + value2.evaluate() + " = " + evaluate();
+                return OUTPUT_HELPER + value.evaluate() + '+' + value2.evaluate() + EQUAL + evaluate();
             }
         }
 
@@ -102,7 +106,7 @@ public class Task1 {
             }
 
             public String toString() {
-                return  "value = " + value.evaluate() + '*' + value2.evaluate() + " = " + evaluate();
+                return OUTPUT_HELPER + value.evaluate() + '*' + value2.evaluate() + EQUAL + evaluate();
             }
         }
     }

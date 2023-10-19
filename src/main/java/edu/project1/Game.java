@@ -14,14 +14,14 @@ public class Game {
 
     private int mistakes;
 
-    public Game(WordDictionary wordDictionary) {
+    public Game(IDictionary wordDictionary) {
         word = new Word(wordDictionary);
         mistakes = 0;
     }
 
     public Result launch() {
         if (word.length() < 2) {
-            return new Result.FailedStart();
+            return Result.FAILED_START;
         }
         boolean running = true;
         while (running) {
@@ -29,20 +29,20 @@ public class Game {
             Scanner scanner = new Scanner(System.in);
             String in = scanner.nextLine();
             var result = takeChar(in);
-            if (!(result instanceof Result.Right || result instanceof Result.Wrong)) {
+            if (!(result == Result.RIGHT || result == Result.WRONG || result == Result.GO)) {
                 return result;
             }
         }
-        return new Result.Finish();
+        return Result.FINISH;
     }
 
     public Result takeChar(String in) {
         if (in.equals("exit")) {
-            return new Result.StopPlaying();
+            return Result.STOP_PLAYING;
         }
         if (in.length() != 1) {
             LOGGER.info("Incorrect");
-            return new Result.Go();
+            return Result.GO;
         }
         char ch = in.charAt(0);
         if (word.tryChar(ch)) {
@@ -57,9 +57,9 @@ public class Game {
         LOGGER.info(INPUT_STRING + word.getCurWord());
         if (word.isWordFull()) {
             LOGGER.info("You won!");
-            return new Result.Win();
+            return Result.WIN;
         }
-        return new Result.Right();
+        return Result.RIGHT;
     }
 
     private Result badGuess() {
@@ -68,8 +68,8 @@ public class Game {
         LOGGER.info(INPUT_STRING + word.getCurWord());
         if (mistakes == MAX_MISTAKES) {
             LOGGER.info("You lost!");
-            return new Result.Defeat();
+            return Result.DEFEAT;
         }
-        return new Result.Wrong();
+        return Result.WRONG;
     }
 }

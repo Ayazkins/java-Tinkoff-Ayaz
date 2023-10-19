@@ -1,7 +1,7 @@
 package edu.hw1;
 
+import edu.project1.DefaultDictionary;
 import edu.project1.Game;
-import edu.project1.WordDictionary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,7 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        var dict = new WordDictionary();
+        var dict = new DefaultDictionary();
         dict.addWord("coffee");
         var game = new Game(dict);
         game.launch();

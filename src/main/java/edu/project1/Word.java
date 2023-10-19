@@ -6,7 +6,7 @@ public class Word {
 
     private String curWord;
 
-    public Word(WordDictionary wordDictionary) {
+    public Word(IDictionary wordDictionary) {
         word = wordDictionary.generate();
         StringBuilder sb = new StringBuilder();
         while (sb.length() < word.length()) {

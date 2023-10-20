@@ -5,6 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 public class RetryExecutor {
 
+    private RetryExecutor() {
+
+    }
+
     private final static Logger LOGGER = LogManager.getLogger();
 
     public static boolean retry(ConnectionManager manager, String command) {

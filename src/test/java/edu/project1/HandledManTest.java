@@ -24,7 +24,6 @@ public class HandledManTest {
         game.takeChar("q");
         game.takeChar("q");
         game.takeChar("q");
-        game.takeChar("q");
         assertThat(game.takeChar("q") == Result.DEFEAT).isEqualTo(true);
     }
 

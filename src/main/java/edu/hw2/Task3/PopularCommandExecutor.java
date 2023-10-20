@@ -22,11 +22,8 @@ public final class PopularCommandExecutor {
         int numberTry = 0;
         while (numberTry < maxAttempts) {
             numberTry += 1;
-            try (Connection connection = manager.getConnection()) {
-                connection.execute(command);
+            if (RetryExecutor.retry(manager, command)) {
                 return;
-            } catch (ConnectionException ex) {
-                LOGGER.info("failed");
             }
         }
         throw new ConnectionException("Failed");

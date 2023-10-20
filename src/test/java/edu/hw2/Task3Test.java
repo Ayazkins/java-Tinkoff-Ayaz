@@ -17,7 +17,7 @@ public class Task3Test {
     @Test
     @DisplayName("Catch Connection Exception test")
     void ExceptionTest() throws Exception {
-        PopularCommandExecutor executor = new PopularCommandExecutor(new FaultyConnectionManager(), 2);
+        PopularCommandExecutor executor = new PopularCommandExecutor(new FaultyConnectionManager(), 3);
         try {
             executor.updatePackages();
         }

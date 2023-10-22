@@ -6,14 +6,15 @@ import org.apache.logging.log4j.Logger;
 public class FaultyConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    private final static double CHANCE_OF_FAULTY = 0.5;
+    private final double chanceOfFaulty = 0.5;
 
-    public void execute(String command) {
-        if (!FailureChecker.shouldItFail(CHANCE_OF_FAULTY)) {
+    public Throwable execute(String command) {
+        if (!FailureChecker.shouldItFail(chanceOfFaulty)) {
             LOGGER.info("Success");
         } else {
             throw new ConnectionException();
         }
+        return null;
     }
 
     public void close() {

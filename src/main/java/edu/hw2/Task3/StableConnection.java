@@ -6,8 +6,9 @@ import org.apache.logging.log4j.Logger;
 public class StableConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public void execute(String command) {
+    public Throwable execute(String command) {
         LOGGER.info("Success");
+        return null;
     }
 
     public void close() {

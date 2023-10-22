@@ -5,19 +5,23 @@ import org.apache.logging.log4j.Logger;
 
 public class RetryExecutor {
 
-    private RetryExecutor() {
+    private final int maxAttempts;
 
+    public RetryExecutor(int maxAttempts) {
+        this.maxAttempts = maxAttempts;
+        curAttempt = 0;
     }
+
+    public int curAttempt;
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public static boolean retry(ConnectionManager manager, String command) {
-        try (Connection connection = manager.getConnection()) {
-            connection.execute(command);
-            return true;
-        } catch (Exception ex) {
-            LOGGER.info("failed");
+    public void execute(Throwable exception) {
+        if (exception != null) {
+            curAttempt += 1;
         }
-        return false;
+        if (curAttempt == maxAttempts) {
+            throw new ConnectionException();
+        }
     }
 }

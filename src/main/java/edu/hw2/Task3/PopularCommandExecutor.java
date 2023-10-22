@@ -25,7 +25,7 @@ public final class PopularCommandExecutor {
         } catch (ConnectionException ex) {
             LOGGER.info("failed");
             retry = new RetryExecutor(retry.curAttempt);
-            throw new ConnectionException();
+            throw new ConnectionException("Failed");
         }
         tryExecute(command);
     }

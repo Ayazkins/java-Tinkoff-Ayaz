@@ -6,11 +6,13 @@ public class Word {
 
     private String curWord;
 
-    public Word(IDictionary wordDictionary) {
+    private final String fill = "*";
+
+    public Word(Dictionary wordDictionary) {
         word = wordDictionary.generate();
         StringBuilder sb = new StringBuilder();
         while (sb.length() < word.length()) {
-            sb.append("*");
+            sb.append(fill);
         }
         curWord = sb.toString();
     }

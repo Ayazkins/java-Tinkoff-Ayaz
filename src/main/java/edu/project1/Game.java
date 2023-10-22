@@ -14,7 +14,7 @@ public class Game {
 
     private int mistakes;
 
-    public Game(IDictionary wordDictionary) {
+    public Game(Dictionary wordDictionary) {
         word = new Word(wordDictionary);
         mistakes = 0;
     }
@@ -23,17 +23,17 @@ public class Game {
         if (word.length() < 2) {
             return Result.FAILED_START;
         }
-        boolean running = true;
-        while (running) {
+        Result running = Result.GO;
+        while (running == Result.GO) {
             LOGGER.info("Guess a letter:");
             Scanner scanner = new Scanner(System.in);
             String in = scanner.nextLine();
-            var result = takeChar(in);
-            if (!(result == Result.RIGHT || result == Result.WRONG || result == Result.GO)) {
-                return result;
+            running = takeChar(in);
+            if (running == Result.RIGHT || running == Result.WRONG) {
+                running = Result.GO;
             }
         }
-        return Result.FINISH;
+        return running;
     }
 
     public Result takeChar(String in) {

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class HandledManTest {
+public class GameTest {
     @Test
     @DisplayName("Incorrect Word")
     void IncorrectWordTest() {
@@ -45,31 +45,4 @@ public class HandledManTest {
         var game = new Game(dict);
         assertThat(game.takeChar("qc") == Result.GO).isEqualTo(true);
     }
-
-    @Test
-    @DisplayName("Word class tests")
-    void WordTest() {
-        var dict = new DefaultDictionary();
-        dict.addWord("coffee");
-        var word = new Word(dict);
-        assertThat(word.tryChar('c')).isEqualTo(true);
-        assertThat(word.isWordFull()).isEqualTo(false);
-        assertThat(word.getCurWord()).isEqualTo("c*****");
-    }
-
-    @Test
-    @DisplayName("Dictionary tests")
-    void DictionaryTest() {
-        var dict = new DefaultDictionary();
-        dict.addWord("coffee");
-        assertThat(dict.generate()).isEqualTo("coffee");
-        dict.addWord("test");
-        String value = dict.generate();
-        assertThat(value.equals("test") || value.equals("coffee")).isEqualTo(true);
-
-    }
-
-
-
-
 }

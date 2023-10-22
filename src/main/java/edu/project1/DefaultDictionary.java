@@ -2,7 +2,7 @@ package edu.project1;
 
 import org.jetbrains.annotations.NotNull;
 
-public class DefaultDictionary implements IDictionary {
+public class DefaultDictionary implements Dictionary {
     private String[] words;
 
     public DefaultDictionary() {

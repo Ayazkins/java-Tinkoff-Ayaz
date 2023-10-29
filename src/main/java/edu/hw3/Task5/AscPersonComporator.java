@@ -5,15 +5,15 @@ import java.util.Comparator;
 public class AscPersonComporator implements Comparator<Person> {
     @Override
     public int compare(Person o1, Person o2) {
-        if (o1.surname == null && o2.surname == null) {
-            return o1.name.compareTo(o2.name);
+        if (o1.getSurname() == null && o2.getSurname() == null) {
+            return o1.getName().compareTo(o2.getName());
         }
-        if (o1.surname == null) {
-            return o1.name.compareTo(o2.surname);
+        if (o1.getSurname() == null) {
+            return o1.getName().compareTo(o2.getSurname());
         }
-        if (o2.surname == null) {
-            return o1.surname.compareTo(o2.name);
+        if (o2.getSurname() == null) {
+            return o1.getSurname().compareTo(o2.getName());
         }
-        return o1.surname.compareTo(o2.surname);
+        return o1.getSurname().compareTo(o2.getSurname());
     }
 }

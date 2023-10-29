@@ -3,10 +3,6 @@ package edu.hw3;
 import java.util.TreeMap;
 
 public final class Task4 {
-    private Task4() {
-
-    }
-
     private final static int THOUSAND = 1000;
     private final static int NINE_HUNDRED = 900;
     private final static int FIVE_HUNDRED = 500;
@@ -39,14 +35,23 @@ public final class Task4 {
         DICT.put(ONE, "I");
     }
 
+    private Task4() {
+
+    }
+
     public static String convertToRoman(int value) {
-        if (value <= 0) {
+        int curValue = value;
+        if (curValue <= 0) {
             throw new IllegalArgumentException("Wrong number");
         }
-        int closestToVal = DICT.floorKey(value);
-        if (value == closestToVal) {
-            return DICT.get(closestToVal);
+        StringBuilder output = new StringBuilder();
+        int closestToVal = DICT.floorKey(curValue);
+        while (curValue != closestToVal) {
+            output.append(DICT.get(closestToVal));
+            curValue = curValue - closestToVal;
+            closestToVal = DICT.floorKey(curValue);
         }
-        return DICT.get(closestToVal) + convertToRoman(value - closestToVal);
+        output.append(DICT.get(closestToVal));
+        return output.toString();
     }
 }

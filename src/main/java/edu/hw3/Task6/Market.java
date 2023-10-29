@@ -2,9 +2,10 @@ package edu.hw3.Task6;
 
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Market implements StockMarket {
-    private PriorityQueue<Stock> stocks;
+    private final Queue<Stock> stocks;
 
     public Market() {
         stocks = new PriorityQueue<>(new StocksComparator());

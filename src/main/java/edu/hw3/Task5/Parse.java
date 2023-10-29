@@ -1,6 +1,8 @@
 package edu.hw3.Task5;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public final class Parse {
     private Parse() {
@@ -12,7 +14,7 @@ public final class Parse {
 
     private static final String SPACE = " ";
 
-    public static ArrayList<Person> parseContacts(String[] names, String format) {
+    public static List<Person> parseContacts(String[] names, String format) {
         ArrayList<Person> list = new ArrayList<>();
         for (String person : names) {
             String[] nameAndSurname = person.split(SPACE);
@@ -25,7 +27,7 @@ public final class Parse {
                 list.add(new Person(nameAndSurname[0], nameAndSurname[1]));
             }
         }
-        if (!(format.equals(ASC) || format.equals(DESC))) {
+        if (!(Objects.equals(format, ASC) || Objects.equals(format, DESC))) {
             throw new IllegalArgumentException();
         }
         if (format.equals(ASC)) {

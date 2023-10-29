@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class Task4Test {
     @DisplayName("Simple test number 14")
     @Test
-    void SimpleTest() {
+    void simpleTest() {
         String output = Task4.convertToRoman(14);
         String expected = "XIV";
         assertThat(output).isEqualTo(expected);
@@ -15,7 +15,7 @@ public class Task4Test {
 
     @DisplayName("Simple test number 3")
     @Test
-    void SimpleAmountOfOnesTest() {
+    void simpleAmountOfOnesTest() {
         String output = Task4.convertToRoman(3);
         String expected = "III";
         assertThat(output).isEqualTo(expected);
@@ -23,7 +23,7 @@ public class Task4Test {
 
     @DisplayName("Wrong number test")
     @Test
-    void WrongNumberTest() {
+    void wrongNumberTest() {
         try {
             Task4.convertToRoman(-5);
         }

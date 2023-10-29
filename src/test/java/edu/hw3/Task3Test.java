@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class Task3Test {
     @DisplayName("Sample test with String")
     @Test
-    void SampleTest() {
+    void sampleTest() {
         Map<String, Integer> output = Task3.freqDict(new String[] {"bb", "a", "bb", "a"});
         Map<String, Integer> expected = new HashMap<>();
         expected.put("bb", 2);

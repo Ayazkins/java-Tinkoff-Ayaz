@@ -25,7 +25,7 @@ public class Task6Test {
 
     @DisplayName("Try get empty test")
     @Test
-    void EmptyTest() {
+    void emptyTest() {
         StockMarket stockMarket = new Market();
 
         try{

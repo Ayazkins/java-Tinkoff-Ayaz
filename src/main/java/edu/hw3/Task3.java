@@ -10,13 +10,8 @@ public final class Task3 {
 
     public static <T> Map<T, Integer> freqDict(T[] input) {
         Map<T, Integer> dict = new HashMap<>();
-        for (T a: input) {
-            if (dict.containsKey(a)) {
-                Integer newInt = dict.get(a) + 1;
-                dict.replace(a, newInt);
-            } else {
-                dict.put(a, 1);
-            }
+        for (T a : input) {
+            dict.put(a, dict.getOrDefault(a, 0) + 1);
         }
         return dict;
     }

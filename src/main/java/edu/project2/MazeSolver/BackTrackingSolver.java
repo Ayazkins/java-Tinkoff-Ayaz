@@ -34,7 +34,7 @@ public class BackTrackingSolver extends SolverBase {
         cells.clear();
         Stack<Cell> stack = new Stack<>();
         Set<Cell> visited = new HashSet<>();
-        Cell currentCell = maze.getCell(start.row(), start.row());
+        Cell currentCell = maze.getCell(start.row(), start.col());
         stack.add(currentCell);
         Map<Cell, Cell> parents = new HashMap<>();
         List<Cell> neighbours = new ArrayList<>();

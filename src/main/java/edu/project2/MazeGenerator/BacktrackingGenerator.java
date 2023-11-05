@@ -10,8 +10,13 @@ import java.util.Set;
 import java.util.Stack;
 
 public class BacktrackingGenerator extends GeneratorBase {
+    private final static int MIN_RANGE = 3;
+
     @Override
     public Maze generate(int height, int width) {
+        if (height < MIN_RANGE && width < MIN_RANGE) {
+            throw new IllegalArgumentException("maze can not be so small");
+        }
         Maze maze = new Maze(height, width);
         Stack<Cell> stack = new Stack<>();
         List<Cell> neighbours = new ArrayList<>();
@@ -21,7 +26,7 @@ public class BacktrackingGenerator extends GeneratorBase {
         stack.push(currentTile);
         while (!stack.isEmpty()) {
             getNeighbours(maze, currentTile, neighbours);
-            for (Iterator<Cell> iter = neighbours.iterator(); iter.hasNext(); ) {
+            for (Iterator<Cell> iter = neighbours.iterator(); iter.hasNext();) {
                 if (visited.contains(iter.next())) {
                     iter.remove();
                 }

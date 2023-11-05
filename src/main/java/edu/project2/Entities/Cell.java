@@ -1,7 +1,5 @@
 package edu.project2.Entities;
 
-import edu.project2.Entities.Type;
-
 public class Cell {
     private final int row;
     private final int col;

@@ -1,7 +1,12 @@
 package edu.project1;
 
+import edu.project2.MazeSolver.BackTrackingSolver;
+import edu.project2.Entities.Coordinate;
+import edu.project2.Entities.Maze;
+import edu.project2.MazeGenerator.BacktrackingGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class GameTest {

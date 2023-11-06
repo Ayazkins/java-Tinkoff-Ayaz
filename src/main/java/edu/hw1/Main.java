@@ -1,11 +1,5 @@
 package edu.hw1;
 
-import edu.project2.Entities.Coordinate;
-import edu.project2.Entities.Maze;
-import edu.project2.MazeGenerator.BacktrackingGenerator;
-import edu.project2.MazeSolver.BackTrackingSolver;
-import edu.project2.Render.JComponentRender;
-
 public final class Main {
     private Main() {
 

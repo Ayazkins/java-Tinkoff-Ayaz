@@ -18,13 +18,13 @@ public class GeneratorsTest {
         BacktrackingGenerator backtrackingGenerator = new BacktrackingGenerator();
         Maze maze = backtrackingGenerator.generate(height, width);
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
-        assertEquals(Result.ValidMaze, backTrackingSolver.isValidMaze(maze));
+        assertEquals(Result.VALID_MAZE, backTrackingSolver.isValidMaze(maze));
 
         Coordinate coordinate = new Coordinate(1, 1);
         for (int i = 0; i < maze.getHeight(); ++i) {
             for (int j = 0; j < maze.getWidth(); ++j) {
                 if (maze.getCell(i, j).getType() == Type.PASSAGE)
-                    assertEquals(Result.Success, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
+                    assertEquals(Result.SUCCESS, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
             }
         }
     }
@@ -36,13 +36,13 @@ public class GeneratorsTest {
         KruskalGenerator kruskalGenerator = new KruskalGenerator();
         Maze maze = kruskalGenerator.generate(height, width);
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
-        assertEquals(Result.ValidMaze, backTrackingSolver.isValidMaze(maze));
+        assertEquals(Result.VALID_MAZE, backTrackingSolver.isValidMaze(maze));
 
         Coordinate coordinate = new Coordinate(1, 1);
         for (int i = 0; i < maze.getHeight(); ++i) {
             for (int j = 0; j < maze.getWidth(); ++j) {
                 if (maze.getCell(i, j).getType() == Type.PASSAGE)
-                    assertEquals(Result.Success, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
+                    assertEquals(Result.SUCCESS, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
             }
         }
     }
@@ -54,13 +54,13 @@ public class GeneratorsTest {
         PrimGenerator primGenerator = new PrimGenerator();
         Maze maze = primGenerator.generate(height, width);
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
-        assertEquals(Result.ValidMaze, backTrackingSolver.isValidMaze(maze));
+        assertEquals(Result.VALID_MAZE, backTrackingSolver.isValidMaze(maze));
 
         Coordinate coordinate = new Coordinate(1, 1);
         for (int i = 0; i < maze.getHeight(); ++i) {
             for (int j = 0; j < maze.getWidth(); ++j) {
                 if (maze.getCell(i, j).getType() == Type.PASSAGE)
-                    assertEquals(Result.Success, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
+                    assertEquals(Result.SUCCESS, backTrackingSolver.solve(maze, coordinate, new Coordinate(i, j)));
             }
         }
     }

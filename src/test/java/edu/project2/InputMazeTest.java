@@ -35,7 +35,7 @@ public class InputMazeTest {
     @Test
     public void isValidMazeTest() {
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
-        assertEquals(Result.ValidMaze, backTrackingSolver.isValidMaze(new Maze(maze)));
+        assertEquals(Result.VALID_MAZE, backTrackingSolver.isValidMaze(new Maze(maze)));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class InputMazeTest {
         for (int i = 0; i < maze.length; ++i) {
             for (int j = 0; j < maze[0].length; ++j) {
                 if (readyMaze.getCell(i, j).getType() == Type.PASSAGE)
-                    assertEquals(Result.Success, backTrackingSolver.solve(new Maze(maze), start, new Coordinate(i, j)));
+                    assertEquals(Result.SUCCESS, backTrackingSolver.solve(new Maze(maze), start, new Coordinate(i, j)));
             }
         }
     }
@@ -54,7 +54,7 @@ public class InputMazeTest {
     @Test
     public void isInvalidMazeTest() {
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
-        assertEquals(Result.InvalidMaze, backTrackingSolver.isValidMaze(new Maze(invalidMaze)));
+        assertEquals(Result.INVALID_MAZE, backTrackingSolver.isValidMaze(new Maze(invalidMaze)));
     }
 
     @Test
@@ -62,6 +62,6 @@ public class InputMazeTest {
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
         Coordinate start = new Coordinate(1, 1);
         Coordinate end = new Coordinate(8, 11);
-        assertEquals(Result.CanNotFindWay, backTrackingSolver.solve(new Maze(invalidMaze), start, end));
+        assertEquals(Result.CAN_NOT_FIND_WAY, backTrackingSolver.solve(new Maze(invalidMaze), start, end));
     }
 }

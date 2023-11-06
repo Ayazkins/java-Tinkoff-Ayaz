@@ -58,28 +58,19 @@ public class MazeVisualizer extends JPanel {
                 g.drawRect(x, y, cellSize, cellSize);
             }
         }
-        if (!(cells == null) && !cells.isEmpty()) {
-            for (var coordinate : cells) {
+        pathAndCells(cells, Color.red, cellSize, g);
+        pathAndCells(coordinateList, Color.green, cellSize, g);
+    }
+
+    private void pathAndCells(List<Coordinate> coordinates, Color color, int cellSize, Graphics g) {
+        if (!(coordinates == null) && !coordinates.isEmpty()) {
+            for (var coordinate : coordinates) {
                 int row = coordinate.row();
                 int col = coordinate.col();
                 int x = col * cellSize;
                 int y = row * cellSize;
 
-                g.setColor(Color.RED);
-
-                g.fillRect(x, y, cellSize, cellSize);
-                g.setColor(Color.BLACK);
-                g.drawRect(x, y, cellSize, cellSize);
-            }
-        }
-        if (!(coordinateList == null) && !coordinateList.isEmpty()) {
-            for (var coordinate : coordinateList) {
-                int row = coordinate.row();
-                int col = coordinate.col();
-                int x = col * cellSize;
-                int y = row * cellSize;
-
-                g.setColor(Color.GREEN);
+                g.setColor(color);
 
                 g.fillRect(x, y, cellSize, cellSize);
                 g.setColor(Color.BLACK);

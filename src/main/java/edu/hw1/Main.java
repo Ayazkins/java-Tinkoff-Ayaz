@@ -7,9 +7,9 @@ public final class Main {
 
     public static void main(String[] args) {
 //        BacktrackingGenerator backtrackingGenerator = new BacktrackingGenerator();
-//        Maze maze = backtrackingGenerator.generate(200, 200);
+//        Maze maze = backtrackingGenerator.generate(300, 300);
 //        Coordinate start = new Coordinate(1, 1);
-//        Coordinate end = new Coordinate(199, 199);
+//        Coordinate end = new Coordinate(299, 299);
 //        BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
 //        backTrackingSolver.solve(maze, start, end);
 //        JComponentRender jComponentRender = new JComponentRender();

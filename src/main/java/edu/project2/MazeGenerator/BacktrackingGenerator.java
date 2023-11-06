@@ -3,11 +3,12 @@ package edu.project2.MazeGenerator;
 import edu.project2.Entities.Cell;
 import edu.project2.Entities.Maze;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class BacktrackingGenerator extends GeneratorBase {
     private final static int MIN_RANGE = 3;
@@ -18,30 +19,30 @@ public class BacktrackingGenerator extends GeneratorBase {
             throw new IllegalArgumentException("maze can not be so small");
         }
         Maze maze = new Maze(height, width);
-        Stack<Cell> stack = new Stack<>();
-        List<Cell> neighbours = new ArrayList<>();
-        Cell currentTile = maze.getCell(1, 1);
-        Set<Cell> visited = new HashSet<>();
-        visited.add(currentTile);
-        stack.push(currentTile);
+        List<Cell> neighbours;
+        Cell currentCell = maze.getCell(1, 1);
+        Set<Cell> visited = new HashSet<>(Collections.singletonList(currentCell));
+        Deque<Cell> stack = new LinkedList<>(Collections.singletonList(currentCell));
         while (!stack.isEmpty()) {
-            getNeighbours(maze, currentTile, neighbours);
-            for (Iterator<Cell> iter = neighbours.iterator(); iter.hasNext();) {
-                if (visited.contains(iter.next())) {
-                    iter.remove();
+            neighbours = getNeighbours(maze, currentCell);
+            List<Cell> toRemove = new ArrayList<>();
+            for (var neighbour : neighbours) {
+                if (visited.contains(neighbour)) {
+                    toRemove.add(neighbour);
                 }
             }
+            neighbours.removeAll(toRemove);
 
             if (neighbours.isEmpty()) {
-                currentTile = stack.pop();
+                currentCell = stack.pop();
                 continue;
             }
 
             Cell randomNeighbor = getRandomNeighbour(neighbours);
 
-            removeWall(maze, currentTile, randomNeighbor);
+            removeWall(maze, currentCell, randomNeighbor);
 
-            currentTile = randomNeighbor;
+            currentCell = randomNeighbor;
             visited.add(randomNeighbor);
             stack.push(randomNeighbor);
         }

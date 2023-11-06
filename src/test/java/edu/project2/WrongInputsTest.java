@@ -26,10 +26,10 @@ public class WrongInputsTest {
         BackTrackingSolver backTrackingSolver = new BackTrackingSolver();
         Coordinate start = new Coordinate(1, 1);
         Coordinate end = new Coordinate(1, 2);
-        assertEquals(Result.EndInWall, backTrackingSolver.solve(mazeReady, start, end));
+        assertEquals(Result.END_IN_WALL, backTrackingSolver.solve(mazeReady, start, end));
         end = new Coordinate(1, 1);
         start = new Coordinate(1, 2);
-        assertEquals(Result.StartInWall, backTrackingSolver.solve(mazeReady, start, end));
+        assertEquals(Result.START_IN_WALL, backTrackingSolver.solve(mazeReady, start, end));
     }
 
     @Test

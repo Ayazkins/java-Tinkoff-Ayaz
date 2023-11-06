@@ -2,6 +2,8 @@ package edu.project2.MazeGenerator;
 
 import edu.project2.Entities.Cell;
 import edu.project2.Entities.Maze;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class GeneratorBase implements Generator {
@@ -10,24 +12,20 @@ public abstract class GeneratorBase implements Generator {
 
     public abstract Maze generate(int height, int width);
 
-    protected void getNeighbours(Maze maze, Cell cell, List<Cell> neighbours) {
-        neighbours.clear();
-        Cell curCell = maze.getUpCell(cell, NEIGHBOURS_THROUGH_WALL);
-        if (curCell != null) {
-            neighbours.add(curCell);
+    protected List<Cell> getNeighbours(Maze maze, Cell cell) {
+        List<Cell> neighbours = new ArrayList<>();
+        List<Cell> all = new ArrayList<>();
+        Collections.addAll(all,
+            maze.getUpCell(cell, NEIGHBOURS_THROUGH_WALL),
+            maze.getDownCell(cell, NEIGHBOURS_THROUGH_WALL),
+            maze.getLeftCell(cell, NEIGHBOURS_THROUGH_WALL),
+            maze.getRightCell(cell, NEIGHBOURS_THROUGH_WALL));
+        for (Cell curCell : all) {
+            if (curCell != null) {
+                neighbours.add(curCell);
+            }
         }
-        curCell = maze.getDownCell(cell, NEIGHBOURS_THROUGH_WALL);
-        if (curCell != null) {
-            neighbours.add(curCell);
-        }
-        curCell = maze.getLeftCell(cell, NEIGHBOURS_THROUGH_WALL);
-        if (curCell != null) {
-            neighbours.add(curCell);
-        }
-        curCell = maze.getRightCell(cell, NEIGHBOURS_THROUGH_WALL);
-        if (curCell != null) {
-            neighbours.add(curCell);
-        }
+        return neighbours;
     }
 
     protected Cell getRandomNeighbour(List<Cell> neighbours) {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class Task5Test {
+public class Task5Test {    
     @DisplayName("Sample test")
     @Test
     void sampleTest() {

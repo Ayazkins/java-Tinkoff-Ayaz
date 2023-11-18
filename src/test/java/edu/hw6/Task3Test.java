@@ -27,8 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Task3Test {
     @Test
     public void filterTest() throws IOException {
-        Path tempDir = Files.createTempDirectory("Test2");
-        Path filePath = tempDir.resolve("Task3.png");
+        Path tempDir = Files.createTempDirectory("Test3");
+        Path filePath = tempDir.resolve("Task-3.png");
         var file = Files.createFile(filePath);
         try {
             Files.write(filePath, List.of("Test file for task 3"), StandardOpenOption.CREATE);
@@ -44,8 +44,7 @@ public class Task3Test {
             .and(magicNumber(84))
             .and(globMatches("*.png"))
             .and(regexContains("-"));
-        try (DirectoryStream<Path> entries = Files.newDirectoryStream(Path.of(
-            "/home/ayaz/IdeaProjects/java 2/java-Tinkoff-Ayaz/files"), filter)) {
+        try (DirectoryStream<Path> entries = Files.newDirectoryStream(tempDir, filter)) {
             int i = 0;
             for (var a : entries) {
                 assertEquals(a.getFileName().toString(), "Task-3.png");

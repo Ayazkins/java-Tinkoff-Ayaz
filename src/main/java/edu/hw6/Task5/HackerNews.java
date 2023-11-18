@@ -17,13 +17,12 @@ public final class HackerNews {
 
     }
 
-    public static long[] hackerNewsTopStories() {
+    public static long[] hackerNewsTopStories(HttpClient httpClient) {
         try {
-            HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(STORIES_URL))
                 .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             String[] ids = response.body().replace("[", "").replace("]", "").split(",");
             long[] topStories = new long[ids.length];
@@ -37,14 +36,13 @@ public final class HackerNews {
         }
     }
 
-    public static String news(long id) {
+    public static String news(long id, HttpClient httpClient) {
         String idUrl = ID_URL + id + ".json";
         try {
-            HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(idUrl))
                 .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             Pattern pattern = Pattern.compile("\"title\":\"(.*?)\"");
             Matcher matcher = pattern.matcher(response.body());
 

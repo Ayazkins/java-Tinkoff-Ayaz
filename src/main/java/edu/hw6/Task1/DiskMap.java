@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DiskMap implements Map<String, String> {
+    private final static String SEPARATOR = ":";
     private Map<String, String> buffMap;
     private final String filePath;
 
@@ -112,14 +113,14 @@ public class DiskMap implements Map<String, String> {
 
     private void addToFile(Object key, Object value) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String line = key + ":" + value;
+            String line = key + SEPARATOR + value;
             writer.write(line);
             writer.newLine();
         }
     }
 
     private void update(Object key, Object value) throws IOException {
-        String lineToRemove = key + ":" + value;
+        String lineToRemove = key + SEPARATOR + value;
         File tempFile = new File("temp.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true))) {
 
@@ -146,7 +147,7 @@ public class DiskMap implements Map<String, String> {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                int delimiterIndex = line.indexOf(':');
+                int delimiterIndex = line.indexOf(SEPARATOR);
                 String key = line.substring(0, delimiterIndex);
                 String value = line.substring(delimiterIndex + 1);
                 buffMap.put(key, value);

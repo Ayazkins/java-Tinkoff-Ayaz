@@ -14,6 +14,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public final class Task4 {
+    private final static String OUTPUT = "Programming is learned by writing programs. ― Brian Kernighan";
+
     private Task4() {
 
     }
@@ -21,28 +23,15 @@ public final class Task4 {
     public static boolean writeText(Path path) {
         try {
             Files.createFile(path);
-
-            OutputStream fileOutputStream = Files.newOutputStream(path, StandardOpenOption.WRITE);
-
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            OutputStream checkedOutputStream =
-                new DigestOutputStream(fileOutputStream, messageDigest);
-
-            OutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
-
-            OutputStreamWriter outputStreamWriter =
-                new OutputStreamWriter(bufferedOutputStream, StandardCharsets.UTF_8);
-
-            PrintWriter printWriter = new PrintWriter(outputStreamWriter);
-
-            String text = "Programming is learned by writing programs. ― Brian Kernighan";
-            printWriter.println(text);
-
-            printWriter.close();
-            outputStreamWriter.close();
-            bufferedOutputStream.close();
-            checkedOutputStream.close();
-            fileOutputStream.close();
+            try (OutputStream fileOutputStream = Files.newOutputStream(path, StandardOpenOption.WRITE);
+                 DigestOutputStream checkedOutputStream = new DigestOutputStream(fileOutputStream, messageDigest);
+                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
+                 OutputStreamWriter outputStreamWriter =
+                     new OutputStreamWriter(bufferedOutputStream, StandardCharsets.UTF_8);
+                 PrintWriter printWriter = new PrintWriter(outputStreamWriter)) {
+                printWriter.println(OUTPUT);
+            }
         } catch (IOException | NoSuchAlgorithmException e) {
             return false;
         }

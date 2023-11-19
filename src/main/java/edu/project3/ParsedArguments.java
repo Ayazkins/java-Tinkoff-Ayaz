@@ -1,4 +1,6 @@
 package edu.project3;
 
-public record ParsedArguments(String path, String from, String to, String format) {
+import java.time.LocalDate;
+
+public record ParsedArguments(String path, LocalDate from, LocalDate to, String format) {
 }

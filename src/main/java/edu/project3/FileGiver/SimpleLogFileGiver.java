@@ -1,8 +1,11 @@
 package edu.project3.FileGiver;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import edu.project3.Exceptions.BadReaderException;
+import edu.project3.Exceptions.InvalidUrlException;
+import edu.project3.Exceptions.NoPathException;
+import edu.project3.LogRecord;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -10,55 +13,64 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class SimpleLogFileGiver {
+public class SimpleLogFileGiver implements LogFileGiver {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public List<String> getLogFiles(String path) {
+    public List<LogRecord> getLogFiles(String path, LocalDate start, LocalDate end) throws InvalidUrlException {
         try {
             if (path.startsWith("http")) {
-               getUrl(path);
+                return filterLogsByTime(getUrl(path), start, end);
             } else {
-               getLocal(path);
+                return filterLogsByTime(getLocal(path), start, end);
             }
         } catch (Exception e) {
-            LOGGER.info("Something goes wrong");
+            throw new InvalidUrlException("URL is invalid");
         }
-        return List.of();
     }
 
-    private List<String> getUrl(String path) throws MalformedURLException {
+    private List<String> getUrl(String path) throws MalformedURLException, BadReaderException {
         URL url = new URL(path);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
-            return reader.lines().collect(Collectors.toList());
+            return reader.lines().toList();
         } catch (IOException e) {
-            LOGGER.info("Wrong url");
-            return List.of();
+            throw new BadReaderException("Reading url mistake");
         }
     }
 
-    private List<String> getLocal(String path) {
+    private List<String> getLocal(String path) throws BadReaderException, NoPathException {
+        List<String> list = new ArrayList<>();
         Path logPath = Paths.get(path);
         if (Files.exists(logPath)) {
-            if (Files.isDirectory(logPath)) {
-                try {
-                    return Files.walk(logPath)
-                        .filter(Files::isRegularFile)
-                        .filter(p -> p.getFileName().toString().endsWith(".log"))
-                        .map(Path::toString)
-                        .collect(Collectors.toList());
-                } catch (IOException e) {
-                    LOGGER.info("Can't find logs");
-                    return List.of();
+            try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    list.add(line);
                 }
-            } else {
-                return List.of(path);
+                return list;
+            } catch (IOException e) {
+                throw new BadReaderException("Reading local file mistake");
             }
         } else {
-            LOGGER.info("File doesn`t exist");
-            return List.of();
+            throw new NoPathException("File doesn't exist");
         }
+    }
+
+    private List<LogRecord> filterLogsByTime(List<String> logs, LocalDate startTime, LocalDate endTime) {
+        Stream<LogRecord> logStream = logs.stream().map(LogRecord::parse);
+        if (startTime != null) {
+            logStream = logStream.filter(log -> log.getTimestamp().isAfter(ChronoLocalDateTime.from(startTime)));
+        }
+        if (endTime != null) {
+            logStream = logStream.filter(log -> log.getTimestamp().isBefore(endTime.atStartOfDay()));
+        }
+        return logStream.toList();
     }
 }

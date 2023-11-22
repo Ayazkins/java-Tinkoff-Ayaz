@@ -17,29 +17,30 @@ public class AdocCreator implements FileCreator {
         adocContent.append("= Log Report\n\n");
 
         adocContent.append("== Statistics\n\n");
-        adocContent.append("* Total Requests: ").append(logReport.getAmountOfRequests()).append("\n");
-        adocContent.append("* Most Busy Day: ").append(logReport.getMostBusyDay()).append("\n");
-        adocContent.append("* Most Active User: ").append(logReport.getMostActiveUser()).append("\n");
-        adocContent.append("* Average Response Size: ").append(logReport.getAverageResponseSize()).append("\n\n");
+        adocContent.append(formatKeyValue("* Total Requests", logReport.getAmountOfRequests()));
+        adocContent.append(formatKeyValue("* Most Busy Day", logReport.getMostBusyDay()));
+        adocContent.append(formatKeyValue("* Most Active User", logReport.getMostActiveUser()));
+        adocContent.append(formatKeyValue("* Average Response Size", logReport.getAverageResponseSize()));
+        adocContent.append("\n");
 
         adocContent.append("== Resources\n\n");
-        for (Map.Entry<String, Integer> resource : logReport.getResources().entrySet()) {
-            adocContent.append("* ").append(resource.getKey()).append(": ").append(resource.getValue()).append("\n");
-        }
+        logReport.getResources().forEach((resource, count) ->
+            adocContent.append(formatKeyValue("* " + resource, count)));
         adocContent.append("\n");
 
         adocContent.append("== Response Codes\n\n");
-        for (Map.Entry<String, Integer> responseCode : logReport.getAnswersCodes().entrySet()) {
-            adocContent.append("* ")
-                .append(responseCode.getKey()).append(": ")
-                .append(responseCode.getValue()).append("\n");
-        }
+        logReport.getAnswersCodes().forEach((responseCode, count) ->
+            adocContent.append(formatKeyValue("* " + responseCode, count)));
 
         Path outputPath = Paths.get(dir, fileName + ".adoc");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath.toFile()))) {
             writer.write(adocContent.toString());
         } catch (IOException e) {
-            throw new InvalidWriterException("Can`t write into file");
+            throw new InvalidWriterException("Can't write to file");
         }
+    }
+
+    private String formatKeyValue(String key, Object value) {
+        return String.format("%s: %s\n", key, value);
     }
 }

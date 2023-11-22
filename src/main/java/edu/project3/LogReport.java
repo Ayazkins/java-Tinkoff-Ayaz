@@ -63,12 +63,12 @@ public class LogReport {
 
         double tempResponseSize = totalResponseSize / responseCount;
 
-        this.amountOfRequests = totalRequests;
-        this.mostBusyDay = tempMostBusyDay.atStartOfDay().toLocalDate();
-        this.mostActiveUser = findMostActiveUser(userRequestCounts);
-        this.averageResponseSize = tempResponseSize;
-        this.resources = resourceCounts;
-        this.answersCodes = responseCodeCounts;
+        amountOfRequests = totalRequests;
+        mostBusyDay = tempMostBusyDay.atStartOfDay().toLocalDate();
+        mostActiveUser = findMostActiveUser(userRequestCounts);
+        averageResponseSize = tempResponseSize;
+        resources = resourceCounts;
+        answersCodes = responseCodeCounts;
     }
 
     private String getResponseCodeName(int responseCode) {

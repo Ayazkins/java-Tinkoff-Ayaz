@@ -21,30 +21,16 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SimpleLogFileGiver implements LogFileGiver {
+public class SimpleLogFileGiver implements LogGiver {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public List<LogRecord> getLogFiles(String path, LocalDate start, LocalDate end) throws InvalidUrlException {
+    public List<LogRecord> getLogFiles(String path, LocalDate start, LocalDate end) throws NoPathException {
         try {
-            if (path.startsWith("http")) {
-                return filterLogsByTime(getUrl(path), start, end);
-            } else {
-                return filterLogsByTime(getLocal(path), start, end);
-            }
+            return filterLogsByTime(getLocal(path), start, end);
         } catch (Exception e) {
-            throw new InvalidUrlException("URL is invalid");
+            throw new NoPathException("Path is invalid");
         }
     }
-
-    private List<String> getUrl(String path) throws MalformedURLException, BadReaderException {
-        URL url = new URL(path);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
-            return reader.lines().toList();
-        } catch (IOException e) {
-            throw new BadReaderException("Reading url mistake");
-        }
-    }
-
     private List<String> getLocal(String path) throws BadReaderException, NoPathException {
         List<String> list = new ArrayList<>();
         Path logPath = Paths.get(path);

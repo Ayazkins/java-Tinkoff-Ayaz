@@ -17,30 +17,30 @@ public class MarkdownCreator implements FileCreator {
         markdownContent.append("# Log Report\n\n");
 
         markdownContent.append("## Statistics\n\n");
-        markdownContent.append("- Total Requests: ").append(logReport.getAmountOfRequests()).append("\n");
-        markdownContent.append("- Most Busy Day: ").append(logReport.getMostBusyDay()).append("\n");
-        markdownContent.append("- Most Active User: ").append(logReport.getMostActiveUser()).append("\n");
-        markdownContent.append("- Average Response Size: ").append(logReport.getAverageResponseSize()).append("\n\n");
+        markdownContent.append(formatKeyValue("- Total Requests", logReport.getAmountOfRequests()));
+        markdownContent.append(formatKeyValue("- Most Busy Day", logReport.getMostBusyDay()));
+        markdownContent.append(formatKeyValue("- Most Active User", logReport.getMostActiveUser()));
+        markdownContent.append(formatKeyValue("- Average Response Size", logReport.getAverageResponseSize()));
+        markdownContent.append("\n");
 
         markdownContent.append("## Resources\n\n");
-        for (Map.Entry<String, Integer> resource : logReport.getResources().entrySet()) {
-            markdownContent.append("- ")
-                .append(resource.getKey()).append(": ")
-                .append(resource.getValue()).append("\n");
-        }
+        logReport.getResources().forEach((resource, count) ->
+            markdownContent.append(formatKeyValue("- " + resource, count)));
         markdownContent.append("\n");
 
         markdownContent.append("## Response Codes\n\n");
-        for (Map.Entry<String, Integer> responseCode : logReport.getAnswersCodes().entrySet()) {
-            markdownContent.append("- ")
-                .append(responseCode.getKey()).append(": ")
-                .append(responseCode.getValue()).append("\n");
-        }
+        logReport.getAnswersCodes().forEach((responseCode, count) ->
+            markdownContent.append(formatKeyValue("- " + responseCode, count)));
+
         Path outputPath = Paths.get(dir, fileName + ".md");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath.toFile()))) {
             writer.write(markdownContent.toString());
         } catch (IOException e) {
-            throw new InvalidWriterException("Can`t write into file");
+            throw new InvalidWriterException("Can't write to file");
         }
+    }
+
+    private String formatKeyValue(String key, Object value) {
+        return String.format("%s: %s  \n", key, value);
     }
 }

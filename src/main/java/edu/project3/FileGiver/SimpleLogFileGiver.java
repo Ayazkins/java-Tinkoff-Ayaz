@@ -1,15 +1,11 @@
 package edu.project3.FileGiver;
 
 import edu.project3.Exceptions.BadReaderException;
-import edu.project3.Exceptions.InvalidUrlException;
 import edu.project3.Exceptions.NoPathException;
 import edu.project3.LogRecord;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,6 +27,7 @@ public class SimpleLogFileGiver implements LogGiver {
             throw new NoPathException("Path is invalid");
         }
     }
+
     private List<String> getLocal(String path) throws BadReaderException, NoPathException {
         List<String> list = new ArrayList<>();
         Path logPath = Paths.get(path);

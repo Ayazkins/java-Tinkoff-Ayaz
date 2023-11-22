@@ -20,8 +20,7 @@ public class UrlLogGiver implements LogGiver {
         throws InvalidUrlException, NoPathException {
         try {
             return filterLogsByTime(getUrl(path), start, end);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new InvalidUrlException("URL is invalid");
         }
     }

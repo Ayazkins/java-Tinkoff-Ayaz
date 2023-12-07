@@ -1,13 +1,7 @@
 package edu.hw7.Task3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 public class PersonDatabaseService extends PersonDatabaseMethods implements PersonDatabase {
     @Override

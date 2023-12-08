@@ -7,27 +7,23 @@ import java.util.concurrent.Callable;
 public class Consumer implements Callable<AbstractMap.SimpleEntry<String, double[]>> {
     private final BlockingQueue<AbstractMap.SimpleEntry<String, double[]>> queue;
 
-    private String name;
-
     public Consumer(BlockingQueue<AbstractMap.SimpleEntry<String, double[]>> queue) {
         this.queue = queue;
     }
 
-    public double sum;
-
-    public double average;
-    public double max;
-    public double min = Double.MAX_VALUE;
-
-    public String getName() {
-        return name;
+    @Override
+    public AbstractMap.SimpleEntry<String, double[]> call() {
+        return consume();
     }
 
     private AbstractMap.SimpleEntry<String, double[]> consume() {
-
+        double sum = 0;
+        double min = Double.MAX_VALUE;
+        double max = 0;
+        double average;
         AbstractMap.SimpleEntry<String, double[]> pair = queue.poll();
         double[] working = pair.getValue();
-        name = pair.getKey();
+        String name = pair.getKey();
         for (int i = 0; i < working.length; ++i) {
             sum += working[i];
             if (working[i] < min) {
@@ -41,8 +37,4 @@ public class Consumer implements Callable<AbstractMap.SimpleEntry<String, double
         return new AbstractMap.SimpleEntry<>(name, new double[] {sum, average, max, min});
     }
 
-    @Override
-    public AbstractMap.SimpleEntry<String, double[]> call() throws Exception {
-        return consume();
-    }
 }

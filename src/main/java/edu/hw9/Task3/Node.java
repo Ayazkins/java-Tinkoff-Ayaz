@@ -32,7 +32,7 @@ public class Node {
         isVisited.set(true);
     }
 
-    public synchronized List<Node> getNeighbours() {
+    public List<Node> getNeighbours() {
         return neighbours;
     }
 }

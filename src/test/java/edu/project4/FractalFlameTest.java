@@ -18,7 +18,7 @@ public class FractalFlameTest {
         System.out.println(end - start);
         System.out.println("Многопоточная версия");
         start = System.currentTimeMillis();
-        fractalFlame.multiThreadGeneration(1920, 1080, 30000, 1000, 10, 1, new FinalTransformation[]{  new SpiralTransformation()}, 4);
+        fractalFlame.multiThreadGeneration(1920, 1080, 30000, 1000, 10, 1, new FinalTransformation[]{  new SpiralTransformation()});
         end = System.currentTimeMillis();
         System.out.println(end - start);
     }
